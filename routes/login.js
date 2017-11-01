@@ -2,17 +2,22 @@ const express=require('express');
 const router=express.Router();
 
 router.get('/',(request,respond)=>{
-	respond.render('login',{success:true});
+	respond.render('login',{errors:request.session.errors});
+	request.session.errors=null;
 });
 router.post('/login',(request,respond)=>{
-	const data=request.body;
-	console.log(data.username);
-	console.log(data.password);
-	if((data.username==""&&data.password=="")||data.username===""||data.password===""){
-		
+	
+	request.check('username','Invalid Login').equals("")
+	request.check('password','Invalid Login').equals("")	
+	const errors=request.validationErrors();
+	if(errors){
+		request.session.errors=true;
+	}else{
+		request.session.errors=false;
+	}	
 		respond.redirect('/');
-		respond.render('login',{sucess:false});
-	}
+
+		
 });
 
 module.exports =router;
