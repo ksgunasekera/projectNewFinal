@@ -10,14 +10,13 @@ var passwordLenError=false;
 var confirmPasswordEmpty=false;
 
 router.get('/',(request,respond)=>{
-	respond.render('registerUser',{error:true,nicError:nicError,usernameError:usernameError,emailEmptyError:emailEmptyError,emailError:emailError,passwordEmptyError:passwordEmptyError,passwordLenError:passwordLenError,confirmPasswordEmpty:confirmPasswordEmpty});
+	respond.render('registerUser',{nicError:nicError,usernameError:usernameError,emailEmptyError:emailEmptyError,emailError:emailError,passwordEmptyError:passwordEmptyError,passwordLenError:passwordLenError,confirmPasswordEmpty:confirmPasswordEmpty});
 	request.session.errors=null;
 });
 
-router.post('/register',(request,respond)=>{
-	request.check('nic').equals("");
 
-	console.log(request.body.username);
+router.post('/register',(request,respond)=>{
+	console.log("POST");
 });
 
 module.exports =router;
