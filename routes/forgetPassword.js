@@ -1,13 +1,14 @@
 const express=require('express');
 const router=express.Router();
 
-router.get('/',(request,respond)=>{
-	respond.render('forgetPassword');
+router.get('/',(request,respond,next)=>{
+	respond.render('forgetPassword',{error:true});
 	request.session.errors=null;
 
 });
-router.post('/forgetPassword/submit',(request,respond)=>{
+router.post('/submit',(request,respond,next)=>{
 	console.log(request.body.email);
+	respond.redirect('/forgetPassword');
 });
 
 module.exports =router;

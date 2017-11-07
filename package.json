@@ -11,7 +11,8 @@
     "express": "^4.15.4",
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
-    "express-validator": "^4.3.0"
+    "express-validator": "^4.3.0",
+    "nodemon": "^1.12.1"
   },
   "devDependencies": {},
   "scripts": {
