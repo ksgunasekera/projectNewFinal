@@ -59,12 +59,13 @@
             	<div class="alert alert-success">
             		<h5>Registration successful</h5>
             	</div>
-            	<%}else{if(nicError) {%>
+            	<%}else{%>
               <div class="form-group">
                 <label>NIC</label>
                 <input type="text" name="nic" id="nic" class="form-control" placeholder="Enter nic">
                 
               </div>
+              <%if(nicError){%>
               <div class="alert alert-danger">
                 	<h5>Enter nic number</h5>
                 </div>
@@ -83,7 +84,7 @@
                 <label>Email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Enter email">
               </div>
-              <%if(emailErrorEmpty){%>
+              <%if(emailEmptyError){%>
               <div class="alert alert-danger">
                 	<h5>Enter email</h5>
                 </div>
@@ -97,7 +98,7 @@
                 <label>Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
               </div>
-              <%if(passwordEmpty){%>
+              <%if(passwordEmptyError){%>
               <div class="alert alert-danger">
                 	<h5>Enter password</h5>
                 </div>
