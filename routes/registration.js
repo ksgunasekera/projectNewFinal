@@ -15,7 +15,7 @@ router.get('/',(request,respond)=>{
 });
 
 
-router.post('/register',(request,respond)=>{
+router.post('/submit',(request,respond)=>{
 	console.log("POST");
 });
 

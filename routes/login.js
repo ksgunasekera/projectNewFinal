@@ -17,7 +17,7 @@ router.post('/login',(request,respond,next)=>{
 	}else{
 		request.session.errors=false;
 	}	
-		//respond.redirect('/');
+		respond.redirect('/');
 
 		
 });

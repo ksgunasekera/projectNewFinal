@@ -42,19 +42,6 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 
 app.use('/',login);
-/*
-app.get('/forgetPassword',(request,respond,next)=>{
-	respond.render('forgetPassword',{error:true});
-	request.session.errors=null;
-
-});
-app.post('/email',(request,respond,next)=>{
-	console.log(request.body.email);
-	respond.redirect('/forgetPassword');
-});
-*/
-
-//app.use('/forgetPasswo',forgetPassword);
 app.use('/registration',registration);
 app.use('/forgetPassword',forgetPassword);
 
