@@ -22,6 +22,22 @@ router.post('/submit',(request,respond)=>{
 	request.check('confirmPassword','5').equals(request.body.paswword);
 
 	var errors=request.validationErrors();
+	if(errors){
+		for(err in errors){
+			if(err.msg=='1'){
+				nicError=true;
+			}else if(err.msg=='2'){
+				usernameError=true;
+			}else if (err.msg=='3') {
+				emailError=true;
+			}else if (err.msg=='4') {
+				passwordError=true;
+			}else if (err.msg=='5') {
+				confirmPasswordError=true;
+			}
+		}
+	}
+	respond.redirect('/registration');
 });
 
 module.exports =router;
