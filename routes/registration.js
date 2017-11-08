@@ -3,20 +3,25 @@ const router=express.Router();
 
 var nicError=false;
 var usernameError=false;
-var emailEmptyError=false;
 var emailError=false;
-var passwordEmptyError=false;
-var passwordLenError=false;
-var confirmPasswordEmpty=false;
+var passwordError=false;
+var confirmPasswordError=false;
 
 router.get('/',(request,respond)=>{
-	respond.render('registerUser',{nicError:nicError,usernameError:usernameError,emailEmptyError:emailEmptyError,emailError:emailError,passwordEmptyError:passwordEmptyError,passwordLenError:passwordLenError,confirmPasswordEmpty:confirmPasswordEmpty});
+	respond.render('registerUser',{nicError:nicError,usernameError:usernameError,emailError:emailError,passwordError:passwordError,confirmPasswordError:confirmPasswordError});
 	request.session.errors=null;
 });
 
 
 router.post('/submit',(request,respond)=>{
 	console.log("POST");
+	request.check('nic','1').equals("");//
+	request.check('username','2').equals("");
+	request.check('email','3').equals("").isEmail();
+	request.check('paswword','4').isLength({min:8});
+	request.check('confirmPassword','5').equals(request.body.paswword);
+
+	var errors=request.validationErrors();
 });
 
 module.exports =router;
