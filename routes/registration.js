@@ -15,26 +15,16 @@ router.get('/',(request,respond)=>{
 
 router.post('/submit',(request,respond)=>{
 	console.log("POST");
-	request.check('nic','1').equals("");//
-	request.check('username','2').equals("");
-	request.check('email','3').equals("").isEmail();
-	request.check('paswword','4').isLength({min:8});
-	request.check('confirmPassword','5').equals(request.body.paswword);
-
+	request.checkBody('nic',"H").isLength({min:10});//
+	request.check('username',"FGH").isLength({min:6,max:12});
+	request.check('email',"ADFR").isEmail();
+	request.check('paswword',"TYR").isLength({min:8}).equals(request.body.confirmPassword);
+	
 	var errors=request.validationErrors();
 	if(errors){
-		for(err in errors){
-			if(err.msg=='1'){
-				nicError=true;
-			}else if(err.msg=='2'){
-				usernameError=true;
-			}else if (err.msg=='3') {
-				emailError=true;
-			}else if (err.msg=='4') {
-				passwordError=true;
-			}else if (err.msg=='5') {
-				confirmPasswordError=true;
-			}
+		for (i in errors){
+			console.log(errors[i].msg);
+		
 		}
 	}
 	respond.redirect('/registration');
