@@ -19,34 +19,14 @@ app.use('/js',express.static(__dirname+'/assets/js'));
 app.use('/css',express.static(__dirname+'/assets/css'));
 app.use('/images',express.static(__dirname+'/assets/images'));
 
-//app.use(expressValidator());
-//app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
+app.use(expressValidator());
+app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(bodyParser.json());
 
 
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
 
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));
 
-app.use(expressSession({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}));
+
 
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
