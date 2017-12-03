@@ -4,6 +4,8 @@ const path=require('path');
 const login=require('./routes/login');
 const registration=require('./routes/registration');
 const forgetPassword=require('./routes/forgetPassword');
+const admin=require('./routes/admin');
+
 const bodyParser=require('body-parser');
 const expressSession =require('express-session');
 const expressValidator=require('express-validator');
@@ -17,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/js',express.static(__dirname+'/assets/js'));
 app.use('/css',express.static(__dirname+'/assets/css'));
+app.use('/fonts',express.static(__dirname+'/assets/fonts'));
 app.use('/images',express.static(__dirname+'/assets/images'));
 
 app.use(expressValidator());
@@ -42,6 +45,7 @@ app.set('view engine','ejs');
 app.use('/',login);
 app.use('/registration',registration);
 app.use('/forgetPassword',forgetPassword);
+app.use('/admin',admin);
 
 app.listen(port,()=>{
 	console.log('Server running at port :'+port);
