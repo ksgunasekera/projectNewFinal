@@ -1,8 +1,25 @@
 var mysql=require('mysql');
-var pool  = mysql.createPool({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'db1'
-});
-module.exports.pool=pool;
+var db;
+var settings = {
+	host:"localhost",
+	user:"root",
+	password:"",
+	database:"db2"
+}; 
+
+function connectDatabase(){
+	if(!db){
+		db = mysql.createConnection(settings);
+		db.connect(function(err){
+			if(!err){
+				console.log("Database connected");	
+			}else{
+				console.log("Error database connection"); 
+			}
+		});
+
+	}
+	return db;
+}
+
+module.exports = connectDatabase();

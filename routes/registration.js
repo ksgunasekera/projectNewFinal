@@ -1,5 +1,6 @@
-const express=require('express');
-const router=express.Router();
+var express=require('express');
+var router=express.Router();
+var connection=require('../modules/dbConnection');
 
 var nicError=false;
 var usernameError=false;
@@ -17,44 +18,182 @@ router.get('/',(request,respond)=>{
 	confirmPasswordError=false;
 });
 
+
 router.get('/submit',(request,respond)=>{
 	respond.render('registerUser',{errors:request.session.errors});
+	
 });
 
-router.post('/submit',(request,respond)=>{
-	console.log("POST");
-	
-	request.check('nic',"1").isLength({min:10,max:12});//
-	request.check('username',"2").isLength({min:6});
-	request.check('email',"3").isEmail();//isLength({min:7});
-	request.check('paswword',"4")
-	
+router.post('/submit',(request,respond,next)=>{
 
-	var errors=request.validationErrors();
-	console.log(errors.length);
-	if(errors){
-		request.session.errors=errors;
-		for (i in errors){
-			console.log(errors[i].msg);
-			if("1"==errors[i].msg){
-				nicError=true;
-				console.log(errors[i].msg);
-			}else if("2"==errors[i].msg){
-				usernameError=true;
-				console.log(errors[i].msg);
-			}else if("3"==errors[i].msg){
+	 const userdata = {
 
-				emailError=true;
-				console.log(errors[i].msg);
-			}else if("4"==errors[i].msg){
-				passwordError=true;
-			}
-		}
-		
-	}
-	request.session.errors=errors;
+		unic:request.body.nic,
+		uname:request.body.username,
+		uemail:request.body.email,
+		upword:request.body.password,
+		upconfirm:request.body.confirmpassword
+
+	};
+
+	if((userdata.unic=='') || (userdata.uname=='') || (userdata.uemail=='') || (userdata.upword=='') || (userdata.upconfirm=='')){
+		request.session.errors=true;
+		nicError=true;
+		usernameError=true;
+		emailError==true;
+		passwordError=true;
+		confirmPasswordError=true;
+		console.log('Invalid registration');
 		respond.redirect('/registration');
-	
+    
+    }else{
+        if((userdata.unic.length ==10) && (userdata.uname.length >=6) && (userdata.upword.length >= 8) && (userdata.upword == userdata.upconfirm)){
+			    var sql="select * from patient where user_id = "+connection.escape(userdata.unic)+" and email = "+connection.escape(userdata.uemail);
+				connection.query(sql,(error,results,fields)=>{
+						if (error) {
+							request.session.errors=true;
+							console.log(error);
+							respond.redirect('/registration');
+								
+						}
+						if(results.length==0) {
+							request.session.errors=true;
+							console.log('Invalid user');
+							respond.redirect('/registration');
+
+						}else{
+                            var sql2="select * from users where user_id = "+connection.escape(userdata.unic);
+                            connection.query(sql2,(error,results,fields)=>{
+								if (error) {
+								    request.session.errors=true;
+								    console.log(error);
+								    respond.redirect('/registration');
+								}
+								if(results.length==0) {
+									var sql3="insert into users (user_id,username,password) values('"+userdata.unic+"','"+userdata.uname+"','"+userdata.upword+"')";
+								    connection.query(sql3,(error,results,fields)=>{
+										if (error) {
+										    request.session.errors=true;
+										    console.log(error);
+										    respond.redirect('/registration');
+										}
+										else{ 
+										    request.session.errors=false;
+										    console.log('Valid user : Succesfully register ');
+										    respond.redirect('/');
+										}   
+
+						            });
+									
+
+								}else{ 
+								    request.session.errors=true;
+								    console.log('Invalid user : Already exist ');
+								    respond.redirect('/registration');
+								}     
+                            });
+
+						}    
+				});
+
+		}else{	
+
+			    if((userdata.unic.length != 10) && (userdata.uname.length < 6) && (userdata.upword.length < 8) && (userdata.upword != userdata.upconfirm)){
+					request.session.errors=true;
+					nicError=true;
+					usernameError=true;
+					passwordError=true;
+					confirmPasswordError=true;
+					console.log('Invalid nic,username,password and password mismatch');
+					respond.redirect('/registration');
+
+                }else{
+                    
+					if((userdata.unic.length != 10) && (userdata.uname.length < 6) && (userdata.upword.length < 8)){
+						request.session.errors=true;
+						nicError=true;
+						usernameError=true;
+						passwordError=true;
+						console.log('Invalid nic,username and password');
+						respond.redirect('/registration');
+
+					}else if((userdata.unic.length != 10) && (userdata.uname.length < 6) && (userdata.upword != userdata.upconfirm)){
+						request.session.errors=true;
+						nicError=true;
+						usernameError=true;
+						confirmPasswordError=true;
+						console.log('Invalid nic,username and password missmatch');
+						respond.redirect('/registration');	
+
+                    }else if((userdata.uname.length < 6) && (userdata.upword.length < 8) && (userdata.upword != userdata.upconfirm)){
+                        request.session.errors=true;
+						usernameError=true;
+						passwordError=true;
+						confirmPasswordError=true;
+						console.log('Invalid username,password and password missmatch');
+						respond.redirect('/registration');
+                    
+                    }else{
+                    	if((userdata.unic.length != 10) && (userdata.uname.length < 6)){
+							request.session.errors=true;
+							nicError=true;
+							usernameError=true;
+							console.log('Invalid nic and username');
+							respond.redirect('/registration');
+		                }else if((userdata.uname.length < 6) && (userdata.upword.length < 8)){
+		                	request.session.errors=true;
+							usernameError=true;
+							passwordError=true;
+							console.log('Invalid username and password');
+							respond.redirect('/registration');
+		                }else if((userdata.uname.length < 6) && (userdata.upword != userdata.upconfirm)){
+							request.session.errors=true;
+							usernameError=true;
+							confirmPasswordError=true;
+							console.log('Invalid username and password missmatch');
+							respond.redirect('/registration');
+						}else if((userdata.upword.length < 8) && (userdata.upword != userdata.upconfirm)){
+							request.session.errors=true;
+							passwordError=true;
+							confirmPasswordError=true;
+							console.log('Invalid password and password missmatch');
+							respond.redirect('/registration');	
+                        }else{
+	                        	if(userdata.unic.length != 10){
+									request.session.errors=true;
+									nicError=true;
+									console.log('Invalid nic');
+									respond.redirect('/registration');
+							    
+							    }else if(userdata.uname.length < 6){
+							    	request.session.errors=true;
+							    	usernameError=true;
+							    	console.log('Invalid username');
+									respond.redirect('/registration');
+
+							    }else if(userdata.upword.length < 8){
+							        request.session.errors=true;
+							        passwordError=true;
+							        console.log('Invalid password');
+									respond.redirect('/registration');
+
+							    }else if(userdata.upword != userdata.upconfirm){
+							        request.session.errors=true;
+							        confirmPasswordError=true;
+							        console.log('Password mismatch');
+									respond.redirect('/registration');
+						    
+								}
+
+                        }
+                    }
+                }       
+                
+		}		
+
+	}			
+				
+						
 });
 
 module.exports =router;
