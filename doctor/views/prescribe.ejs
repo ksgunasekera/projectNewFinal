@@ -1,111 +1,121 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+ <head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Diabitic Clinic | Login</title>
+   <title>Doctor Dashboard</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
-  </head>
+   <!-- Bootstrap core CSS -->
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/style.css" rel="stylesheet">
+   <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 
-  <body>
+ </head>
 
-    <nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand">Diabetic Clinic</a>
+ <body>
+
+   <nav class="navbar navbar-default">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="icon-bar"></span>
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="#">Doctor Dashboard</a>
+       </div>
+       <div id="navbar" class="collapse navbar-collapse">
+         <ul class="nav navbar-nav">
+          <li><a href="/getpatient">Back</a></li>
+          <li class="active"><a href="/prescribe">Prescribe</a></li>
+           <li><a href="/viewreports">View Reports</a></li>
+         </ul>
+         <ul class="nav navbar-nav navbar-right">
+           <li class="active"><a href="#">Welcome, Doctor</a></li>
+           <li><a href="login.html">Logout</a></li>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>
+
+
+   <header id="header">
+     <div class="container">
+       <div class="row">
+         <div class = "col-md-10">
+           <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Doctor <small>Prescribe</small></h1>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          
-           
-        </div><!--/.nav-collapse -->
       </div>
-    </nav>
+    </div>
 
-    <header id="header">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="text-center">Patient Report Details</h1>
-          </div>
-         
-        </div>
-      </div>
-      
-    </header>
+   </header>
 
-    <hr>
+  <section id="breadcrumb">
+     <div class="container">
+      <ol class="breadcrumb">
+        <li><a href="index.html"></a>Dashboard</li>
+        <li class="active">Patient</li>
+      </ol>
+    </div>
+  </section>
 
-    <section id="main">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
 
-             <div class="btn-group btn-group-justified">
-                <a href="/oldreports" class="btn btn-primary">Old Descriptions</a>
-                <a href="/otherreports" class="btn btn-primary">View Reports</a>
-             </div> 
+  <section id="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="list-group">
+             <a href="index.html" class="list-group-item active">
+               Dashboard
+             </a>
+             <a href="doctor.ejs" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Patient<span class="badge">30</span></a>
+              <a href="getpatient.ejs" class="list-group-item"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>  Prescribe<span class="badge">30</span></a>
+             <a href="prescribe.ejs" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>  Reports<span class="badge">50</span></a>
+            </div>
+          </div> 
 
-             <br>
-            
-            <form id="pdf" action="/prescribe/submit" method="POST" class="well">
-              <div class="form-group">
-                 <label for="description">Enter Description</label></br>
-                 <textarea rows="4" cols="70" name="description" >Enter text here...</textarea>
-              </div> 
+          <div class="col-md-9">
 
-              <br>
-                <center>
-                  <input type="submit" class="btn btn-primary" value="Submit" id="pdf">  
-           
-                  <button type="button" onclick="javascript:history.back()" class="btn btn-primary">Back</button>
-                </center>  
-                    
-            </form>
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
 
-              <br>
-              <br>
-   
+                 <div class="btn-group btn-group-justified">
+                    <a href="/oldreports" class="btn btn-primary">Old Descriptions</a>
+                    <a href="/otherreports" class="btn btn-primary">View Reports</a>
+                 </div> 
+
+                 <br>
+                
+                <form id="pdf" action="/prescribe/submit" method="POST" class="well">
+                  <div class="form-group">
+                     <label for="description">Enter Description</label></br>
+                     <textarea rows="4" cols="70" name="description" >Enter text here...</textarea>
+                  </div> 
+
+                  <br>
+                    <center>
+                      <input type="submit" class="btn btn-primary" value="Submit" id="pdf">  
                
-          </div>
-       
-        </div>
-        
-      </div>
-    </section>
-    
-
-    <!--ckeditor-->
-    <footer id="footer">
-      <p>Copyright &copy</p>
-      
-    </footer>
-    <!--ckeditor-->
-    <script>
-      CKEDITOR.replace( 'pagebody' );
-    </script>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+                      <button type="button" onclick="javascript:history.back()" class="btn btn-primary">Back</button>
+                    </center>  
+                        
+                </form>
    
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+              </div> 
+           </div>
+        </div>
+      </div>
+    </div>
+ </section>
     
-  </body>
+
+  <!-- Bootstrap core JavaScript
+   ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+ </body>
 </html>
