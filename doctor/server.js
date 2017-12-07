@@ -8,8 +8,8 @@ var flash=require('connect-flash');
 var fs=require('fs');
 var pdf=require('pdfkit');
 
-var port =8000;
-
+var port =3000;
+ 
 var doctor=require('./routes/doctor');
 var getPatient=require('./routes/getpatient');
 var prescribe=require('./routes/prescribe');
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/js',express.static(__dirname+'/assets/js'));
 app.use('/css',express.static(__dirname+'/assets/css'));
-app.use('/images',express.static(__dirname+'/assets/images'));
+app.use('/fonts',express.static(__dirname+'/assets/fonts'));
 
 app.use('/required', express.static('required'));
 
