@@ -50,11 +50,10 @@
     </header>
   
    
-    <%if(patient){ %>
     <section id="main">
       <div class="container">
         <div class="row">
-          <h2>Patient Table</h2>
+          <h2>Patient List</h2>
           <div class="col-md-2"></div>
           <div class="col-md-8">
             
@@ -64,9 +63,6 @@
 
                     <th>Name</th> 
                     <th>Type</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Action</th>
 
                     </thead>
 
@@ -79,14 +75,7 @@
 
                            <td><%= patient[i].name %></td>
                            <td><%= patient[i].type %></td>
-                           <td><%= patient[i].age %></td>
-                           <td><%= patient[i].gender %></td>
-                           <%if(i==0){ %>
-                           <td> 
-                            <a href="/getpatient/<%= patient[i].user_id %>"><button class="btn btn-primary">Get</button></a>
-                           </td>
-
-                           <%  } %>
+                         
                         
                        </tr>
 
@@ -95,6 +84,10 @@
                      </tbody>
 
                </table>
+
+                <div class="btn-group btn-group-justified">
+                     <a href="/getpatient" class="btn btn-primary">Get</a>
+                </div> 
              
           </div>
           
@@ -103,7 +96,6 @@
       </div>
       
     </section>
-    <% } %>
 
   
  
