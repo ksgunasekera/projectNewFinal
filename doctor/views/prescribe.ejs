@@ -12,7 +12,8 @@
     <title>Diabitic Clinic | Login</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
   </head>
 
@@ -40,26 +41,60 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center">Prescribe</h1>
+            <h1 class="text-center">Patient Report Details</h1>
           </div>
          
         </div>
       </div>
       
     </header>
-    
-    
+
+    <hr>
+
     <section id="main">
-      
-           <div class="btn-group btn-group-justified">
-           <center>
-                   <button type="button" onclick="javascript:history.back()" class="btn btn-primary">Back</button>
-           </center>
-           </div>
-     
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+
+             <div class="btn-group btn-group-justified">
+                <a href="/oldreports" class="btn btn-primary">Old Descriptions</a>
+                <a href="/otherreports" class="btn btn-primary">View Reports</a>
+             </div> 
+
+             <br>
+            
+            <form id="pdf" action="/prescribe/submit" method="POST" class="well">
+              <div class="form-group">
+                 <label for="description">Enter Description</label></br>
+                 <textarea rows="4" cols="70" name="description" >Enter text here...</textarea>
+              </div> 
+
+              <br>
+                <center>
+                  <input type="submit" class="btn btn-primary" value="Submit" id="pdf">  
+           
+                  <button type="button" onclick="javascript:history.back()" class="btn btn-primary">Back</button>
+                </center>  
+                    
+            </form>
+
+              <br>
+              <br>
+   
+               
+          </div>
+       
+        </div>
+        
+      </div>
     </section>
     
-   
+
+    <!--ckeditor-->
+    <footer id="footer">
+      <p>Copyright &copy</p>
+      
+    </footer>
     <!--ckeditor-->
     <script>
       CKEDITOR.replace( 'pagebody' );
@@ -68,6 +103,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+   
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     
