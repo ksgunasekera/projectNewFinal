@@ -12,7 +12,8 @@
     <title>Diabitic Clinic | Login</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
   </head>
 
@@ -52,7 +53,7 @@
     <section id="main">
       <div class="container">
         <div class="row">
-          <h2><%= data[0].name %></h2>
+          <h2><%= data[0].user_id %></h2>
           <div class="col-md-2"></div>
           <div class="col-md-8">
             
@@ -90,8 +91,7 @@
                <br>
                         
                        <div class="btn-group btn-group-justified">
-                          <a href="/viewreport/<%= data[0].user_id %>" class="btn btn-primary">View Report</a>
-                          <a href="/prescribe/<%= data[0].user_id %>" class="btn btn-primary">Prescribe</a>
+                          <a href="/prescribe" class="btn btn-primary">Prescribe</a>
                           <a href="/" class="btn btn-primary">Exit</a>
                        </div> 
 
@@ -104,11 +104,14 @@
     </section>
     <% } %>
 
+    <footer id="footer">
+      <p>Copyright &copy</p>
+      
+    </footer>
     <!--ckeditor-->
     <script>
       CKEDITOR.replace( 'pagebody' );
     </script>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
