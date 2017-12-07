@@ -5,12 +5,13 @@ var bodyParser=require('body-parser');
 var expressSession =require('express-session');
 var expressValidator=require('express-validator');
 var flash=require('connect-flash');
+var fs=require('fs');
+var pdf=require('pdfkit');
 
 var port =8000;
 
 var doctor=require('./routes/doctor');
 var getPatient=require('./routes/getpatient');
-var viewReport=require('./routes/viewreport');
 var prescribe=require('./routes/prescribe');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,7 +41,6 @@ app.set('view engine','ejs');
 
 app.use('/',doctor);
 app.use('/getpatient',getPatient);
-app.use('/viewreport',viewReport);
 app.use('/prescribe',prescribe);
 
 app.listen(port,()=>{
