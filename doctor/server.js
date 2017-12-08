@@ -13,6 +13,7 @@ var port =3000;
 var doctor=require('./routes/doctor');
 var getPatient=require('./routes/getpatient');
 var prescribe=require('./routes/prescribe');
+var viewReports=require('./routes/viewreports');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -42,6 +43,7 @@ app.set('view engine','ejs');
 app.use('/',doctor);
 app.use('/getpatient',getPatient);
 app.use('/prescribe',prescribe);
+app.use('/viewreports',viewReports);
 
 app.listen(port,()=>{
 	console.log('Server running at port :'+port);
