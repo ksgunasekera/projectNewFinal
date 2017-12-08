@@ -22,6 +22,7 @@
        <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
            <span class="icon-bar"></span>
+           <span class="sr-only">Toggle navigation</span>
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
@@ -29,7 +30,8 @@
        </div>
        <div id="navbar" class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
-           <li><a href="/">Back</a></li>
+           <li><a href="/">Patient List</a></li>
+           <li class="active"><a href="#">Get Patient</a></li>
            <li><a href="/prescribe">Prescribe</a></li>
            <li><a href="/viewreports">View Reports</a></li>
          </ul>
@@ -56,8 +58,7 @@
   <section id="breadcrumb">
      <div class="container">
       <ol class="breadcrumb">
-        <li><a href="index.html"></a>Dashboard</li>
-        <li class="active">Patient</li>
+        <li class="active">Diabitic Clinic | Patient List | Get Patient </li>
       </ol>
     </div>
   </section>
@@ -68,12 +69,11 @@
       <div class="row">
         <div class="col-md-3">
             <div class="list-group">
-             <a href="index.html" class="list-group-item active">
-               Dashboard
-             </a>
-             <a href="doctor.ejs" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Patient<span class="badge">30</span></a>
-              <a href="getpatient.ejs" class="list-group-item"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>  Prescribe<span class="badge">30</span></a>
-             <a href="prescribe.ejs" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>  Reports<span class="badge">50</span></a>
+             <a href="/" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Patient List <span class="badge">30</span></a>
+             <a href="/getpatient" class="list-group-item active">
+               Get Patient </a>
+             <a href="/prescribe" class="list-group-item"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>  Prescribe </a>
+             <a href="/viewreports" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> View Reports<span class="badge">50</span></a>
            </div>
           </div> 
 
@@ -107,11 +107,7 @@
              </table>
               <br>
               <br>
-                        
-                 <div class="btn-group btn-group-justified">
-                     <a href="/prescribe" class="btn btn-primary">Prescribe</a>
-                     <a href="/" class="btn btn-primary">Exit</a>
-                 </div> 
+                      
             </div>
           </div>
        </div>
