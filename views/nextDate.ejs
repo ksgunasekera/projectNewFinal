@@ -37,7 +37,7 @@
             <ul>
                 <li><a href="/home">Home</a></li>
                 <li><a href="/">My Profile</a></li>
-                <li  class="selected-item"><a href="/list/prescription/<%= patient_id%>">Prescription</a></li>
+                <li class="selected-item"><a href="/list/nextDate/<%= patient_id;%>">Patient Next Date</a></li>
                 <li><a href="/report">Patient Report</a></li>
                 <li><a href="/staffTelNo">Staff Contact Numbers</a></li>
             </ul>
@@ -47,40 +47,33 @@
 
     </aside>
     <section id="content" class="column-right">
+        <form action="/list/updateNextDate/<%= patient_id%>" method="post">
+            <label>Select Date:</label>
+            <input type="date" name="date"><br>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Did you confirm THIS DATE ' +
+                         'after select the Medicine to the Patient..?'+
+                         'IF NOT Please Select CANCEL..! AND GO TO Green Button To SELECT Medicine...'+
+                         'Otherwise You lose to select medicine..!!!')">Confirm</button>
+        </form>
 
         <div class="container">
-            <h1>Prescription</h1>
             <hr>
-            <h3>Patient ID:&nbsp<%= patient_id%>&nbsp&nbsp
-                <a href="/list/selectPatient/<%= patient_id%>" class="btn btn-success active">Patient Details</a>&nbsp&nbsp
-                <a href="/list/nextDate/<%= patient_id%>" class="btn btn-danger active">Patient Next Date</a>
-            </h3>
-            <form action="#" method="post">
             <div class=" col-md-9 col-lg-9 ">
-                <table class="table table-user-information" align="center">
-                    <tbody>
-                    <tr>
-                        <td><h4>Medicine Name</h4></td>
-                        <td><h4>Action</h4></td>
-                    </tr>
-                    <% for (var i=0;i<medicine.length;i++){%>
-                    <tr>
-                        <td><%= medicine[i].Name;%></td>
-                        <td><input type="checkbox" name="n" value="n">n&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="bid" value="bid">bid&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="daily" value="daily">daily&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="mane" value="mane">mane&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="TDs" value="TDs">TDs&nbsp&nbsp&nbsp&nbsp
-                        </td>
-                    </tr>
-                     <% } %>
-                    </tbody>
-                </table>
-                <br>
-            </div>
-            </form>
-        </div>
+            <table class="table table-user-information" align="center">
+                <tbody>
+                <tr>
+                    <td>
+                        <a href="/list/prescription/<%= patient_id%>" class="btn btn-success active">Prescription</a>
+                    </td>
+                    <td>
+                        <a href="/list" class="btn btn-warning active">Patient List</a>
+                    </td>
+                </tr>
 
+                </tbody>
+            </table>
+        </div>
+        </div>
 
 
             <footer class="clear">

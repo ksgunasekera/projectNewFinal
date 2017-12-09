@@ -23,7 +23,7 @@ var con=require('../config/connection');
 /* GET My Profile page. */
 
 router.get('/', function(req, res, next) {
-    con.query('CREATE OR REPLACE VIEW waitingList AS SELECT patient_id FROM patient WHERE date=?;',today);
+    con.query('CREATE OR REPLACE VIEW waitingList AS SELECT patient_id FROM oppointment WHERE date=?',today);
     con.query('select patient_id from waitingList',function (err, rows,fields) {
         if (err) throw err;
         res.render('list', {patientList: rows});
@@ -33,17 +33,6 @@ router.get('/', function(req, res, next) {
 
 });
 
-
-
-router.get('/deletePatient/:id',function (req,res,next) {
-    var patientId = req.params.id;
-    con.query("update patient set date=? where patient_id=?", [today, patientId], function (err) {
-            if (err) throw err;
-            res.redirect('/list');
-
-        });
-
-    });
 
 router.get('/selectPatient/:id',function (req,res,next) {
     var patientId = req.params.id;
@@ -67,6 +56,27 @@ router.get('/prescription/:id', function(req, res, next) {
 });
 
 
+
+router.get('/nextDate/:id', function(req, res, next) {
+    var patientId = req.params.id;
+    res.render('nextDate', {patient_id:patientId});
+
+});
+
+
+router.post('/updateNextDate/:id', function(req, res, next) {
+    var patientId = req.params.id;
+    console.log(req.body.date);
+    con.query('UPDATE oppointment\n' +
+        'SET date = ?\n' +
+        'WHERE patient_id=?;',[req.body.date,patientId],function (err,rows,fields) {
+        if (err) throw err;
+        res.redirect('/list');
+    });
+
+
+
+});
 
 
 
