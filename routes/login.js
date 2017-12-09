@@ -1,51 +1,38 @@
-var express=require('express');
-var router=express.Router();
-var connection=require('../modules/dbConnection');
+const express=require('express');
+const router=express.Router();
+const userlogin=require('../controllers/verifyPatient');
 
 
+var loginError=false;
 router.get('/',(request,respond,next)=>{
-	respond.render('login',{errors:request.session.errors});
+	respond.render('login',{errors:loginError});
 	request.session.errors=null;
+	loginError=false;
 });
 router.post('/login',(request,respond,next)=>{
-    
-    const userdata = {
-
-		uname:request.body.username,
-		pword:request.body.password
-
-	};
- 
-	if((userdata.uname=='') || (userdata.pword=='')){
-		request.session.errors=true;
-		console.log('Invalid login');
+	
+	if(request.body.username.length==0 || request.body.password.length==0){
+		loginError=true;
+	}
+	
+	
+	
+	if(loginError==true){
 		respond.redirect('/');
-			
 	}
 	else{
-		var sql="select * from users where username = "+connection.escape(userdata.uname)+" and password = "+connection.escape(userdata.pword);
-		connection.query(sql,(error,results,fields)=>{
-				if (error) {
-					request.session.errors=true;
-					console.log(error);
-					respond.redirect('/');
-					
-				}
-				if(results.length==0) {
-					request.session.errors=true;
-					console.log('Invalid user');
-					respond.redirect('/');
+		
+		var user={
+			username:request.body.username,
+			password:request.body.password
+			}
+		
+		
+		userlogin.login(user);
 
-				}else{
-					request.session.errors=false;
-					console.log('Valid user : Welcome '+results[0].username);
-					respond.redirect('/');
-
-				}
-		});
 	}
 
+		
 });
-
 
 module.exports =router;
