@@ -83,40 +83,30 @@
         <div class=" col-md-9 col-lg-9 ">
             <table class="table table-user-information" align="center">
                 <tbody>
-                <% for (var i=0;i<doctor.length;i++){%>
                 <tr>
                     <td>Doctor Id:</td>
-                    <td><%= doctor[i].doc_id;%></td>
+                    <td><%= doctor[0].staff_Id;%></td>
                 </tr>
                 <tr>
                     <td>First Name:</td>
-                    <td><%= doctor[i].firstName;%></td>
+                    <td><%= doctor[0].firstName;%></td>
                 </tr>
                 <tr>
                     <td>Last Name:</td>
-                    <td><%= doctor[i].lastName;%></td>
+                    <td><%= doctor[0].lastName;%></td>
                 </tr>
                 <tr>
-                    <td>Gender:</td>
-                    <td><%= doctor[i].gender;%></td>
+                    <td>Email:</td>
+                    <td><%= doctor[0].email;%></td>
                 </tr>
                 <tr>
-                    <td>Qualifications:</td>
-                    <td><%= doctor[i].qualifications;%></td>
-                </tr>
-                <tr>
-                    <td>Telephone Number:</td>
-                    <td><%= doctor[i].telNo;%></td>
-                </tr>
-                <tr>
-                    <td>Email Address:</td>
-                    <td><%= doctor[i].email;%></td>
+                    <td>Contact Number:</td>
+                    <td><%= doctor[0].contactNo;%></td>
                 </tr>
                 <tr>
                     <td>Possession:</td>
-                    <td><%= doctor[i].possession;%></td>
+                    <td><%= doctor[0].Designation;%></td>
                 </tr>
-                <% }%>
 
                 </tbody>
             </table>
