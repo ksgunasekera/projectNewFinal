@@ -48,7 +48,7 @@ router.get('/prescription/:id', function(req, res, next) {
     var patientId = req.params.id;
     con.query('select Name from medicine',function (err,rows,fields) {
         if (err) throw err;
-        res.render('prescription', {medicine: rows,reg_no:patientId});
+        res.render('prescription', {medicine: rows,reg_no:patientId,date:today});
 
     });
 

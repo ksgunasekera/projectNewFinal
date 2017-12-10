@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Diabitic Clinic | Doctor Module</title>
+    <title><%= reg_no%> | <%= date%></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -77,14 +77,14 @@
             </div>
           </div>
 
-
           <section id="content" class="column-right">
 
         <div class="container">
-            <h3>Patient ID:&nbsp<%= reg_no%>&nbsp&nbsp
-                <a href="/doctor/list/selectPatient/<%= reg_no%>" class="btn btn-success active">Patient Details</a>&nbsp&nbsp
-                <a href="/doctor/list/nextDate/<%= reg_no%>" class="btn btn-danger active">Patient Next Date</a>
-            </h3>
+            <h3>Patient ID:&nbsp<%= reg_no%>&nbsp&nbsp | <%= date%>&nbsp&nbsp
+
+            <a href="/doctor/list/selectPatient/<%= reg_no%>" class="btn btn-success active">Patient Details</a>&nbsp&nbsp
+            <a href="/doctor/list/nextDate/<%= reg_no%>" class="btn btn-danger active">Patient Next Date</a></h3>
+
             <form action="#" method="post">
             <div class=" col-md-9 col-lg-9 ">
                 <table class="table table-user-information" align="center">
@@ -111,7 +111,11 @@
             </form>
         </div>
 
+              <a class="btn btn-warning active" onclick="window.print()">Download PDF</a>
+
+
     </section>
+
 
    
     <footer id="footer">
@@ -128,6 +132,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
             <script src="/js/jquery.min.js"></script>
             <script src="/js/bootstrap.min.js"></script>
+
     
   </body>
 </html>
