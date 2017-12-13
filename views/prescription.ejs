@@ -70,8 +70,6 @@
         <div class="row">
           <div class="col-md-3">
             <div class="list-group">
-              <a href="/doctor/home" class="list-group-item"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Home</a>
-              <a href="/doctor/" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> MY Profile</a>
               <a href="/doctor/list/prescription/<%= reg_no%>" class="list-group-item active main-color-bg"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>  Prescription</a>
             </div>
           </div>
@@ -82,10 +80,10 @@
             <h3>Patient ID:&nbsp<%= reg_no%>&nbsp&nbsp | <%= date%>&nbsp&nbsp
 
             <a href="/doctor/list/selectPatient/<%= reg_no%>" class="btn btn-success active">Patient Details</a>&nbsp&nbsp
-             <a href="#" class="btn btn-primary active">View Old Prescriptions</a>&nbsp&nbsp
-            <a href="/doctor/list/nextDate/<%= reg_no%>" class="btn btn-danger active">Patient Next Date</a></h3>
+             <a href="/doctor/list/view/<%= reg_no%>" class="btn btn-primary active">View Old Prescriptions</a>&nbsp&nbsp
+            <a href="/doctor/list/nextDate/<%= reg_no%>" class="btn btn-danger active" onclick="return confirm('Did YOU Download AND CONFIRM The Prescription BEFORE START To SELECT Next Date..!')">Patient Next Date</a></h3>
 
-            <form action="#" method="post">
+            <form action="/doctor/list/insert/<%= reg_no%>" method="post">
             <div class=" col-md-9 col-lg-9 ">
                 <table class="table table-user-information" align="center">
                     <tbody>
@@ -96,18 +94,18 @@
                     <% for (var i=0;i<medicine.length;i++){%>
                     <tr>
                         <td><%= medicine[i].Tablet;%></td>
-                        <td><input type="checkbox" name="n" value="n">n&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="bid" value="bid">bid&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="daily" value="daily">daily&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="mane" value="mane">mane&nbsp&nbsp&nbsp&nbsp
-                            <input type="checkbox" name="TDs" value="TDs">TDs&nbsp&nbsp&nbsp&nbsp
+                        <td><input type="checkbox" name="n" value="n">n&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <input type="checkbox" name="bid" value="bid">bid&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <input type="checkbox" name="daily" value="daily">daily&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <input type="checkbox" name="mane" value="mane">mane&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <input type="checkbox" name="TDs" value="TDs">TDs&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         </td>
                     </tr>
                      <% } %>
                     </tbody>
                 </table>
                 <br>
-            </div>
+            </div><button type="submit" class="btn btn-danger" name="prescription" value="<%= reg_no%>_<%= date%>.pdf">Confirm Prescription</button>
             </form>
         </div>
 

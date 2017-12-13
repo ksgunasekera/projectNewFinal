@@ -3,7 +3,7 @@ var router = express.Router();
 
 /*database connection*/
 var con=require('../modules/connection');
-/* GET My Profile page. */
+/* GET prograss chart  page. */
 
 router.get('/', function(req, res, next) {
     res.render('report');

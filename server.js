@@ -26,6 +26,7 @@ app.use('/js',express.static(__dirname+'/assets/js'));
 app.use('/css',express.static(__dirname+'/assets/css'));
 app.use('/fonts',express.static(__dirname+'/assets/fonts'));
 app.use('/images',express.static(__dirname+'/assets/images'));
+app.use('/prescriptions',express.static(__dirname+'/assets/prescriptions'));
 
 app.use(expressValidator());
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));

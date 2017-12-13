@@ -20,7 +20,7 @@ today = yyyy + '-' + mm + '-' +dd;
 
 /*database connection*/
 var con=require('../modules/connection');
-/* GET My Profile page. */
+/* GET Patient list page. */
 
 router.get('/', function(req, res, next) {
     con.query('select reg_no from addmision',function (err, rows,fields) {
@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-
+/* remove the patient from the addmision table when patient get by doctor page. */
 router.get('/selectPatient/:id',function (req,res,next) {
     var patientId = req.params.id;
     con.query("DELETE FROM ADDMISION WHERE reg_no=?;",patientId);
@@ -43,6 +43,8 @@ router.get('/selectPatient/:id',function (req,res,next) {
     });
 
 });
+
+/* retrive the medicine page. */
 
 router.get('/prescription/:id', function(req, res, next) {
     var patientId = req.params.id;
@@ -56,14 +58,14 @@ router.get('/prescription/:id', function(req, res, next) {
 });
 
 
-
+/* get the select next date page. */
 router.get('/nextDate/:id', function(req, res, next) {
     var patientId = req.params.id;
     res.render('nextDate', {reg_no:patientId});
 
 });
 
-
+/* enter the next date in to appointment table. */
 router.post('/updateNextDate/:id', function(req, res, next) {
     var patientId = req.params.id;
     con.query('UPDATE appointment\n' +
@@ -77,6 +79,39 @@ router.post('/updateNextDate/:id', function(req, res, next) {
 
 });
 
+
+/* insert the prescription to pdf table. */
+
+router.post('/insert/:id', function(req, res, next) {
+    var patientId = req.params.id;
+    con.query("INSERT INTO pdf\n" +
+        "VALUES (?,?)",[patientId,req.body.prescription],function (err,result) {
+        if(err) throw err;
+        res.redirect('/doctor/list/prescription/'+patientId);
+
+    });
+
+});
+
+/* view the pdf list in pdf table. */
+router.get('/view/:id', function(req, res, next) {
+    var patientId = req.params.id;
+    con.query('select prescription from pdf where reg_no=?',patientId,function (err, rows,fields) {
+        if (err) throw err;
+        res.render('medicineList', {medicineList: rows ,reg_no:patientId });
+
+    });
+
+
+});
+
+/* retrive the relevent pdf from pdf   table. */
+router.get('/viewPdf/:id', function(req, res,next) {
+    var pdfName = req.params.name;
+        res.render('viewPdf', {viewPdf: pdfName});
+
+
+});
 
 
 
